@@ -66,3 +66,70 @@ const [in1, in2, in3] = studentInfo;
 
 const { name } = in1;
 console.log(name);
+
+// //중첩된 객체의 깊은 비구조화 할당
+
+// const styles = {
+//     size: {
+//         width: 300,
+//         height: 200,
+//     },
+//     color: {
+//         fontColor: 'red',
+//         bgColor: "blue"
+//     }
+// }
+
+// const { size: { width, height }, color: { fontColor, bgColor } } = styles;
+
+// const myInfo = (name, age, job, hobby) =>
+//   `제 이름은 ${name}이고 나이는 ${age}이며 직업은 ${job}입니다
+//   그리고 ${hobby}를 좋아합니다`;
+// // {}안에 ``으로 사용하게되면 {}때문에 ``이 무시됩니다
+// // ``을 {}로 묶으면 인수안에 인수를 넣는 꼴이 되버려서 언디파인드(오류)가 됩니다
+// console.log(myInfo("진의주", "24", "학생", "게임"));
+// 실무에서 가장 중요한 건 협업입니다. 협업에서 걸림돌이 되는 것은 무조건 지양해야합니다.
+
+// obj란 함수를 호출하는 곳에서 인수를 객체로 넣어주는데, 그 넣는 인수 객체를 받아주는
+// 매개변수라고 할 수 있습니다.
+// obj는 변수이고 변수안의 각각의 키값으로 넣어져있는 값들을 끄집어서 각 해당하는 부분에
+// name, age, job 등이 들어가져야 하므로 각각의 값에 obj.name과 같이 객체안의 값을 불러 와야합니다.
+
+// const myInfo = (
+//   obj
+// ) => `제 이름은 ${obj.name}이고 나이는 ${obj.age}이며 직업은 ${obj.job}입니다
+//  그리고 ${obj.hobby}를 좋아합니다`;
+
+// console.log(
+//   myInfo({
+//     name: "진의주",
+//     age: 24,
+//     job: "학생",
+//     hobby: "축구",
+//   })
+// );
+
+// 단점 : 코드의 가독성이 떨어지고, 디폴트파라미터를 넣을 수 없다.
+
+const myInfo = ({
+  name,
+  age,
+  job = "무직",
+  hobby,
+}) => `제 이름은 ${name}이고 나이는 ${age}이며 직업은 ${job}입니다
+  그리고 ${hobby}를 좋아합니다`;
+
+console.log(
+  myInfo({
+    name: "진의주",
+    age: 24,
+    // job: "학생",
+    hobby: "축구",
+  })
+);
+
+/*
+코드의 가족성을 높이기 위해서 obj의 객체를 구조분해할당으로 매개변수자리에 넣어줌으로써
+바로 해당 키값을 알 수 있고 값을 넣는 구간에도 obj.name처럼 어렵게가 아닌 직관적인 값을
+넣어 줄 수 있다. 또한 구조분해할당으로 넣는 매개변수자리에 디폴트파라미터를 넣어줄 수도 있다.
+*/
